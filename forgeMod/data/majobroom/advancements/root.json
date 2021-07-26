@@ -1,0 +1,28 @@
+
+{
+  "display": {
+    "icon": {
+      "item": "majobroom:broom_item"
+    },
+    "title": {
+      "translate": "advancements.majobroom.root.title"
+    },
+    "description": {
+      "translate": "advancements.majobroom.root.description"
+    },
+    "background": "majobroom:textures/item/dark_oak_planks.png",
+    "show_toast": false
+  },
+  "criteria": {
+    "certus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "majobroom:broom_item"
+          }
+        ]
+      }
+    }
+  }
+}

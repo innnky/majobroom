@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: majobroom_mod_unfinished
+MixinConfigs: majobroom.mixins.json
+Implementation-Version: 1.0
+Specification-Vendor: examplemodsareus
+Specification-Title: examplemod
+Implementation-Timestamp: 2021-05-18T22:39:23+0800
+Specification-Version: 1
+Implementation-Vendor: examplemodsareus
+

@@ -1,0 +1,11 @@
+{
+  "item.majobroom.broom_item": "Метла Ведьмы",
+  "item.majobroom.majo_hat": "Шляпа Ведьмы",
+  "item.majobroom.wand_item": "Палочка Ведьмы",
+  "itemGroup.majobroom.majo_group": "Majo's Broom",
+  "message.majobroom.position": "положение: %d, %d",
+  "message.majobroom.levelnotenough": "Недостаточный Уровень Опыта!",
+  "message.majobroom.showlevel": "Текущий Уровень :%d",
+  "advancements.majobroom.root.title": "Мир Магии",
+  "advancements.majobroom.root.description": "Создайте метлу"
+}

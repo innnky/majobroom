@@ -1,0 +1,5 @@
+{
+  "loader": "forge:obj",
+  "model": "majobroom:models/block/untitled.obj",
+  "flip-v": true
+}

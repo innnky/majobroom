@@ -1,0 +1,14 @@
+{
+  "item.majobroom.broom_item": "魔女的扫帚",
+  "item.majobroom.majo_hat": "魔女的帽子",
+  "item.majobroom.wand_item": "魔杖",
+  "itemGroup.majobroom.majo_group": "魔女的扫帚",
+  "key.category.majobroom": "魔女的扫帚",
+  "item.majobroom.majo_cloth": "魔女的长袍",
+  "key.down": "下降",
+  "key.up": "上升",
+  "message.majobroom.levelnotenough": "等级不足，无法骑乘扫帚",
+  "message.majobroom.showlevel": "当前等级 :%d",
+  "advancements.majobroom.root.title": "魔法的世界",
+  "advancements.majobroom.root.description": "制作一把扫帚"
+}

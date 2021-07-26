@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " p ",
+    "pmp",
+    "pgp"
+  ],
+  "key": {
+    "p": {
+      "item": "minecraft:purple_wool"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "m": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "result": {
+    "item": "majobroom:majo_cloth",
+    "count": 1
+  }
+}

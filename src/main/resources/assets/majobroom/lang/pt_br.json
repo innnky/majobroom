@@ -1,0 +1,11 @@
+{
+  "item.majobroom.broom_item": "Vassoura de Bruxa",
+  "item.majobroom.majo_hat": "Chapéu de Bruxa",
+  "item.majobroom.wand_item": "Varinha de Bruxa",
+  "itemGroup.majobroom.majo_group": "Majo's Broom (Vasoura de Bruxa)",
+  "message.majobroom.position": "posição: %d, %d",
+  "message.majobroom.levelnotenough": "Nível de experiência insuficiente!",
+  "message.majobroom.showlevel": "Nível atual :%d",
+  "advancements.majobroom.root.title": "Mundo Mágico",
+  "advancements.majobroom.root.description": "Faça uma vassoura"
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "majobroom:item/majo_hat",
+    "layer1": "majobroom:item/majo_hat_overlay"
+  }
+}

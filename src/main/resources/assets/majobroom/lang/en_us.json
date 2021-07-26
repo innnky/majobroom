@@ -1,0 +1,15 @@
+{
+  "item.majobroom.broom_item": "Majo's Broom",
+  "item.majobroom.majo_hat": "Majo's Hat",
+  "item.majobroom.wand_item": "Majo's Wand",
+  "item.majobroom.majo_cloth": "Majo's Cloth",
+  "itemGroup.majobroom.majo_group": "Majo's Broom",
+  "message.majobroom.position": "position: %d, %d",
+  "key.category.majobroom": "Majo's Broom",
+  "key.down": "Down",
+  "key.up": "Up",
+  "message.majobroom.levelnotenough": "Experience Level Not Enough!",
+  "message.majobroom.showlevel": "Current Level :%d",
+  "advancements.majobroom.root.title": "Magical World",
+  "advancements.majobroom.root.description": "Make a broom"
+}

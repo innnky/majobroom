@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "com/innky/majobroom/mixin/MinecraftMixin": {
+      "populateSearchTreeManager": "Lnet/minecraft/client/Minecraft;func_193986_ar()V"
+    }
+  },
+  "data": {
+    "searge": {
+      "com/innky/majobroom/mixin/MinecraftMixin": {
+        "populateSearchTreeManager": "Lnet/minecraft/client/Minecraft;func_193986_ar()V"
+      }
+    }
+  }
+}

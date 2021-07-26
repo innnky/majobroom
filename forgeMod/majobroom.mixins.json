@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.innky.majobroom.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "majobroom.refmap.json",
+  "mixins": [],
+  "client": [
+    "BoatMixin",
+    "ItemColorMixin",
+    "MinecraftMixin",
+    "BipedArmorLayerMixin"
+  ],
+  "server": [],
+  "minVersion": "0.8"
+
+}
