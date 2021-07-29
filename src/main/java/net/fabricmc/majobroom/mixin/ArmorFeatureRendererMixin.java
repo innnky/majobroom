@@ -40,6 +40,8 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
 
     @Shadow protected abstract A getArmor(EquipmentSlot slot);
 
+    @Shadow public abstract void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l);
+
     //    @Inject(at = @At("HEAD"), method = "getArmor", cancellable = true)
 //    private void getArmor(EquipmentSlot slot, CallbackInfoReturnable<A> cir) {
 //        System.out.println("before return");
@@ -47,19 +49,35 @@ public abstract class ArmorFeatureRendererMixin<T extends LivingEntity, M extend
 //    }
     @Inject(at = @At("HEAD"), method = "render", cancellable = true)
     private void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo ci) {
+
         if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof BaseArmor) {
             A model = (A) new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(256, 256), "majo_hat.json");
             this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.HEAD, i, model);
-            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.CHEST, i, this.getArmor(EquipmentSlot.CHEST));
-            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.LEGS, i, this.getArmor(EquipmentSlot.LEGS));
-            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.FEET, i, this.getArmor(EquipmentSlot.FEET));
-            ci.cancel();
+        }else {
+            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.HEAD, i, this.getArmor(EquipmentSlot.HEAD));
         }
+
+        if (livingEntity.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof BaseArmor){
+            A model = (A) new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(256, 256), "majo_cloth.json");
+            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.CHEST, i, model);
+        }else {
+            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.CHEST, i, this.getArmor(EquipmentSlot.CHEST));
+        }
+
+        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.LEGS, i, this.getArmor(EquipmentSlot.LEGS));
+        this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.FEET, i, this.getArmor(EquipmentSlot.FEET));
+        ci.cancel();
+
     }
     @Inject(at = @At("HEAD"), method = "getArmorTexture", cancellable = true)
     private void getArmorTexture(ArmorItem item, boolean legs, String overlay, CallbackInfoReturnable<Identifier> cir) {
         if (item instanceof BaseArmor){
-            cir.setReturnValue(new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+"majo_hat"+(overlay == null ? "" : "_" + overlay) + ".png"));
+            if (item.toString().equals("majo_hat")){
+                cir.setReturnValue(new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+item.toString()+(overlay == null ? "" : "_" + overlay) + ".png"));
+            }else {
+                cir.setReturnValue(new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+item.toString() + ".png"));
+            }
         }
+
     }
 }

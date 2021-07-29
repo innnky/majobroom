@@ -16,11 +16,11 @@ public class MajoWearableModel extends BipedEntityModel<LivingEntity> {
     private final ModelPart base;
     private final Map<String, ModelPartData> bones = new HashMap();
     private final HashMap<String, GeomtryBean.BonesBean> bonesBean = new HashMap();
-
+    public  String name ;
     public MajoWearableModel(ModelPart root, String name) {
         super(root);
         this.base = getTexturedModelData(name).createModel();
-
+        this.name = name;
     }
 
 
@@ -33,7 +33,14 @@ public class MajoWearableModel extends BipedEntityModel<LivingEntity> {
         if(this.bones.get("bigBody") == null){
             this.base.copyTransform(this.head);
         }else {
-
+            this.base.getChild("bigBody").copyTransform(this.body);
+            this.base.getChild("bone81").getChild("left").copyTransform(this.rightArm);
+            this.base.getChild("bone81").getChild("right").copyTransform(this.leftArm);
+            ModelPart dress = (ModelPart)this.base.getChild("dress");
+//            dress.pivotX =dress.pivotX+0.1f;
+//            dress.pivotX
+//            System.out.println(111);
+//            this.base.getChild()
         }
         this.base.render(matrices, vertices, light, overlay, red, green, blue, alpha);
     }

@@ -103,8 +103,6 @@ public class BroomEntity extends BoatEntity {
                 }
                 g_v = (float) (g_v*(1-accspeed) +target_g*accspeed);
 
-
-
                 float target_yaw = 0;
                 if (left){
                     target_yaw-=10;

@@ -26,7 +26,7 @@ public class MajoBroom implements ModInitializer {
 	//盔甲部分
 	public static final ArmorMaterial FABRIC_ARMOR = new ArmorFabric();
 	public static final Item broomItem = new BroomItem(new Item.Settings().group(MajoBroom.majoGroup).maxCount(1));
-//	public static final Item majoCloth = new BaseArmor(FABRIC_ARMOR, EquipmentSlot.CHEST);
+	public static final Item majoCloth = new BaseArmor(FABRIC_ARMOR, EquipmentSlot.CHEST);
 	public static final Item majoHat = new BaseArmor(FABRIC_ARMOR, EquipmentSlot.HEAD);
 
 
@@ -41,9 +41,13 @@ public class MajoBroom implements ModInitializer {
 	public void onInitialize() {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "group"), group);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "broom_item"), broomItem);
-//		Registry.register(Registry.ITEM, new Identifier(MODID, "majo_cloth"), majoCloth);
+		Registry.register(Registry.ITEM, new Identifier(MODID, "majo_cloth"), majoCloth);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "majo_hat"), majoHat);
 //		FabricDefaultAttributeRegistry.register(CUBE, CubeEntity);
 //		Registry.register(Registry.ITEM, new Identifier(MODID, "fabric_helmet"), new BaseArmor(FABRIC_ARMOR, EquipmentSlot.HEAD));
+	}
+
+	public static void main(String[] args) {
+		System.out.println("sda");
 	}
 }
