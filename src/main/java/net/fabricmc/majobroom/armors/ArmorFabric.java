@@ -31,7 +31,7 @@ public class ArmorFabric implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return null;//设置使用铁砧修复的配方，可选
+        return Ingredient.EMPTY;//设置使用铁砧修复的配方，可选
     }
 
     @Override
