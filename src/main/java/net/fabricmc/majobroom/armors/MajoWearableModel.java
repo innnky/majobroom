@@ -34,9 +34,18 @@ public class MajoWearableModel extends BipedEntityModel<LivingEntity> {
             this.base.copyTransform(this.head);
         }else {
             this.base.getChild("bigBody").copyTransform(this.body);
+            this.base.getChild("epic").copyTransform(this.body);
             this.base.getChild("bone81").getChild("left").copyTransform(this.rightArm);
             this.base.getChild("bone81").getChild("right").copyTransform(this.leftArm);
             ModelPart dress = (ModelPart)this.base.getChild("dress");
+            dress.pitch = (this.leftLeg.pitch +this.rightLeg.pitch)/2;
+            dress.pivotZ = this.leftLeg.pivotZ;
+            if (this.sneaking){
+                dress.pivotY =10.0F;
+                dress.pivotX =-1.04F;
+            }else {
+                dress.pivotY =10.0F;
+            }
 //            dress.pivotX =dress.pivotX+0.1f;
 //            dress.pivotX
 //            System.out.println(111);
@@ -70,7 +79,7 @@ public class MajoWearableModel extends BipedEntityModel<LivingEntity> {
 
                 if (bone.getCubes() != null) {
                     for (GeomtryBean.BonesBean.CubesBean cube : bone.getCubes()) {
-                        newBone.uv((Integer) cube.getUv().get(0), (Integer) cube.getUv().get(1)).cuboid(this.convertOrigin(bone, cube, 0), this.convertOrigin(bone, cube, 1), this.convertOrigin(bone, cube, 2), (Float) cube.getSize().get(0), (Float) cube.getSize().get(1), (Float) cube.getSize().get(2));
+                        newBone.uv((Integer) cube.getUv().get(0), (Integer) cube.getUv().get(1)).cuboid(this.convertOrigin(bone, cube, 0), this.convertOrigin(bone, cube, 1), this.convertOrigin(bone, cube, 2), (Float) cube.getSize().get(0), (Float) cube.getSize().get(1), (Float) cube.getSize().get(2),new Dilation(cube.getInflate()));
                     }
                 }
 
