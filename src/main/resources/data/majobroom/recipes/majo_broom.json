@@ -7,16 +7,16 @@
   ],
   "key": {
     "q": {
-      "item": "minecraft:stick"
+      "item": "minecraft:blaze_rod"
     },
     "c": {
       "item": "minecraft:phantom_membrane"
     },
     "d": {
-      "item": "minecraft:ghast_tear"
+      "item": "minecraft:hay_block"
     },
     "e": {
-      "item": "minecraft:hay_block"
+      "item": "minecraft:shulker_shell"
     }
   },
   "result": {
