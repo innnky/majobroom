@@ -2,8 +2,11 @@ package net.fabricmc.majobroom.armors;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 
 public class ArmorFabric implements ArmorMaterial {
     public static final int[] BASE_DURABILITY = new int[]{20,30,25,15};//定义护甲的耐久，此处数据按照从头到脚的顺序
@@ -26,12 +29,12 @@ public class ArmorFabric implements ArmorMaterial {
 
     @Override
     public SoundEvent getEquipSound() {
-        return null;//设置使用时的声音，可选
+        return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;//设置使用时的声音，可选
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.EMPTY;//设置使用铁砧修复的配方，可选
+        return Ingredient.ofItems(Items.PURPLE_WOOL);//设置使用铁砧修复的配方，可选
     }
 
     @Override
