@@ -7,7 +7,7 @@
   ],
   "client": [
     "MinecraftMixin",
-    "ArmorFeatureRendererMixin"
+    "PlayerEntityRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
