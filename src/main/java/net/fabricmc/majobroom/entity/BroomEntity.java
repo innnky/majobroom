@@ -61,6 +61,9 @@ public class BroomEntity extends BoatEntity {
 
     @Override
     public void tick() {
+
+        autoFall();
+
         if (this.hasPassengers()){
             if (passenger == null){
                 if (this.world.isClient && MinecraftClient.getInstance().player.getId() == this.getFirstPassenger().getId()){
@@ -236,6 +239,13 @@ public class BroomEntity extends BoatEntity {
 
     public float getFloatingValue(float tickDelta){
         return MathHelper.lerp(tickDelta, this.prevFloatingValue, this.floatingValue);
+    }
+
+    public void autoFall(){
+        if (!this.hasPassengers()){
+            this.setVelocity(0,-0.1,0);
+            this.move(MovementType.SELF,this.getVelocity());
+        }
     }
 
 
