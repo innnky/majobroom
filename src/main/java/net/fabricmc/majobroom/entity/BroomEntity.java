@@ -39,6 +39,9 @@ public class BroomEntity extends BoatEntity {
     private final float accspeed = 0.2f;
     private  float maxspeed = 1f;
     private final float max_gspeed = 0.5f;
+    private float floatingValue = 0;
+    private float floatingCounts = 0;
+    private  float prevFloatingValue = 0;
     @Override
     public Item asItem() {
         return MajoBroom.broomItem;
@@ -53,7 +56,7 @@ public class BroomEntity extends BoatEntity {
     @Override
     public void updatePassengerPosition(Entity passenger) {
         super.updatePassengerPosition(passenger);
-        passenger.setPosition(passenger.getX(),passenger.getY()+0.6,passenger.getZ());
+        passenger.setPosition(passenger.getX(),passenger.getY()+0.6 +floatingValue,passenger.getZ());
     }
 
     @Override
@@ -73,6 +76,7 @@ public class BroomEntity extends BoatEntity {
             }
             passenger = null;
         }
+
 
 
         if (this.world.isClient()){
@@ -127,6 +131,7 @@ public class BroomEntity extends BoatEntity {
 
             smoothMovementFromOtherPlayer();
         }
+        updateFloatingValue();
 
     }
 
@@ -218,4 +223,20 @@ public class BroomEntity extends BoatEntity {
         }
         return false;
     }
+
+    private void updateFloatingValue(){
+        this.prevFloatingValue = this.floatingValue;
+        this.floatingCounts += 0.05f;
+        if (this.floatingCounts > 6.28f){
+            this.floatingCounts -= 6.28f;
+        }
+        this.floatingValue = 0.1f * MathHelper.sin(2*this.floatingCounts);
+//        System.out.println(floatingValue);
+    }
+
+    public float getFloatingValue(float tickDelta){
+        return MathHelper.lerp(tickDelta, this.prevFloatingValue, this.floatingValue);
+    }
+
+
 }

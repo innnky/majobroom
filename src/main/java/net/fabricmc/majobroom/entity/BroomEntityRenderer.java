@@ -21,7 +21,9 @@ public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(broomModel.getLayer(getTexture(entity)));
         float y = entity.getYaw(tickDelta);
         float p = entity.getPitch(tickDelta);
+        float floating_value = entity.getFloatingValue(tickDelta);
         matrices.push();
+        matrices.translate(0,floating_value,0);
         matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(p));
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90-y));
         broomModel.render(matrices,vertexConsumer,light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
