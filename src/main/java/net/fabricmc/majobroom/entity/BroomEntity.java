@@ -199,7 +199,6 @@ public class BroomEntity extends BoatEntity {
             return ActionResult.PASS;
         } else {
             if (!this.world.isClient) {
-                player.getAbilities().allowFlying=true;
                 return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
             } else {
                 return ActionResult.SUCCESS;
@@ -220,7 +219,9 @@ public class BroomEntity extends BoatEntity {
         if (source.getSource() instanceof PlayerEntity s){
             this.kill();
             if (!s.isCreative()) {
-                s.getInventory().insertStack(MajoBroom.broomItem.getDefaultStack());
+                if(!s.getInventory().insertStack(MajoBroom.broomItem.getDefaultStack())){
+                    dropItem(asItem());
+                }
             }
             return true;
         }
