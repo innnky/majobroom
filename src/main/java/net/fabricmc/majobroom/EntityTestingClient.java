@@ -5,6 +5,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.majobroom.entity.BroomEntityRenderer;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.entity.EntityRenderers;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
@@ -21,6 +23,6 @@ public class EntityTestingClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(MajoBroom.BROOM_ENTITY_ENTITY_TYPE, (context) -> {
             return new BroomEntityRenderer(context);
         });
-//        EntityModelLayerRegistry.registerModelLayer(MODEL_CUBE_LAYER, CubeEntityModel::getTexturedModelData);
+    //        EntityModelLayerRegistry.registerModelLayer(MODEL_CUBE_LAYER, CubeEntityModel::getTexturedModelData);
     }
 }

@@ -17,8 +17,8 @@ public class BaseArmor extends DyeableArmorItem implements DyeableItem {
         return nbtCompound != null && nbtCompound.contains("color", 99) ? nbtCompound.getInt("color") : 14525383;
     }
 
-    @Override
-    public boolean hasGlint(ItemStack stack) {
-        return false;
-    }
+//    @Override
+//    public boolean hasGlint(ItemStack stack) {
+//        return false;
+//    }
 }
