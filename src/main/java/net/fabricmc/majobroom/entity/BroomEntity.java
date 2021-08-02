@@ -61,14 +61,14 @@ public class BroomEntity extends BoatEntity {
         if (this.hasPassengers()){
             if (passenger == null){
                 if (this.world.isClient && MinecraftClient.getInstance().player.getId() == this.getFirstPassenger().getId()){
-                    //MinecraftClient.getInstance().options.setPerspective(Perspective.THIRD_PERSON_BACK);
+                    MinecraftClient.getInstance().options.setPerspective(Perspective.THIRD_PERSON_BACK);
                 }
             }
             passenger = this.getFirstPassenger();
         }else {
             if (passenger != null){
                 if (this.world.isClient && MinecraftClient.getInstance().player.getId() == passenger.getId()){
-                    //MinecraftClient.getInstance().options.setPerspective(Perspective.FIRST_PERSON);
+                    MinecraftClient.getInstance().options.setPerspective(Perspective.FIRST_PERSON);
                 }
             }
             passenger = null;
