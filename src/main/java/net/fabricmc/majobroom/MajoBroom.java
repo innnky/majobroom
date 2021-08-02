@@ -20,8 +20,7 @@ import net.minecraft.util.registry.Registry;
 
 public class MajoBroom implements ModInitializer {
 	public static final String MODID = "majobroom";
-	public static final Item group = new Item(new Item.Settings().group(MajoBroom.majoGroup));
-	public static final ItemGroup majoGroup = FabricItemGroupBuilder.build(new Identifier("majobroom", "majo_group"), () -> new ItemStack(MajoBroom.group));
+	public static final ItemGroup majoGroup = FabricItemGroupBuilder.build(new Identifier("majobroom", "majo_group"), () -> new ItemStack(MajoBroom.broomItem));
 
 	//盔甲部分
 	public static final ArmorMaterial FABRIC_ARMOR = new ArmorFabric();
@@ -39,7 +38,6 @@ public class MajoBroom implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		Registry.register(Registry.ITEM, new Identifier(MODID, "group"), group);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "broom_item"), broomItem);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "majo_cloth"), majoCloth);
 		Registry.register(Registry.ITEM, new Identifier(MODID, "majo_hat"), majoHat);
