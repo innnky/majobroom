@@ -17,7 +17,7 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	maven { url "https://maven.shedaniel.me/" }
-	maven { url "https://maven.terraformersmc.com/releases/com/terraformersmc/modmenu/" }
+	maven { url "https://maven.terraformersmc.com/releases/" }
 }
 
 dependencies {
