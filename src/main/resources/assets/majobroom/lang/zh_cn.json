@@ -12,5 +12,6 @@
   "message.majobroom.showlevel": "当前等级 :%d",
   "advancements.majobroom.root.title": "魔法的世界",
   "advancements.majobroom.root.description": "制作一把扫帚",
-  "message.majobroom.position": "位置 %d, %d"
+  "message.majobroom.position": "位置 %d, %d",
+  "modmenu.descriptionTranslation.majobroom": "添加了一个魔女的扫帚物品及实体，以及魔女的帽子和衣服。\n该模组以魔女之旅中伊蕾娜的扫帚为原型制作。\n操作方法逻辑来自原版中的船，ws前后，ad转向，ctrl下降 ，空格上升。\n右键地面即可召唤出扫帚，左键收回。\n当穿上衣服或帽子后可以飞的更快。\n"
 }
