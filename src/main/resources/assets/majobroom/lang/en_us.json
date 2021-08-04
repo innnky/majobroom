@@ -8,6 +8,7 @@
   "key.category.majobroom": "Majo's Broom",
   "key.down": "Down",
   "key.up": "Up",
+  "entity.majobroom.majo_broom": "Majo's Broom",
   "message.majobroom.levelnotenough": "Experience Level Not Enough!",
   "message.majobroom.showlevel": "Current Level :%d",
   "advancements.majobroom.root.title": "Magical World",

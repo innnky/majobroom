@@ -1,20 +1,27 @@
 {
   "schemaVersion": 1,
   "id": "majobroom",
-  "version": "0.1",
+  "version": "0.2",
 
   "name": "Majo's Broom",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "A flying broom!",
   "authors": [
-    "Me!"
+    "Innnky",
+    {
+      "name": "ZYFDroid",
+      "contact": {
+        "homepage": "https://github.com/ZYFDroid"
+      }
+    }
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/majos-broom",
+    "sources": "https://github.com/innnky/majobroom",
+    "issues": "https://github.com/innnky/majobroom/issues"
   },
 
   "license": "All rights reserved.",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/majobroom/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -23,6 +30,9 @@
     ],
     "client": [
       "net.fabricmc.majobroom.EntityTestingClient"
+    ],
+    "modmenu": [
+      "net.fabricmc.majobroom.config.ModMenuEntryPoint"
     ]
   },
   "mixins": [
@@ -33,9 +43,15 @@
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.17.x",
-    "java": ">=16"
+    "java": ">=16",
+    "cloth-config2":">=5.0.34"
   },
   "suggests": {
-    "another-mod": "*"
+    "modmenu": ">=2.0.4"
+  },
+  "custom": {
+    "modmenu": {
+
+    }
   }
 }
