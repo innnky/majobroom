@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.impl.item.group.FabricCreativeGuiComponents;
 import net.fabricmc.majobroom.armors.ArmorFabric;
 import net.fabricmc.majobroom.armors.BaseArmor;
+import net.fabricmc.majobroom.config.MajoBroomConfig;
 import net.fabricmc.majobroom.entity.BroomEntity;
 import net.fabricmc.majobroom.items.BroomItem;
 import net.minecraft.client.MinecraftClient;
@@ -46,7 +47,7 @@ public class MajoBroom implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(MODID, "majo_hat"), majoHat);
 //		FabricDefaultAttributeRegistry.register(CUBE, CubeEntity);
 //		Registry.register(Registry.ITEM, new Identifier(MODID, "fabric_helmet"), new BaseArmor(FABRIC_ARMOR, EquipmentSlot.HEAD));
-
+		MajoBroomConfig.getInstance();
 
 
 	}

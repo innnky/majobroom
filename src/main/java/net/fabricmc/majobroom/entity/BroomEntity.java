@@ -3,6 +3,8 @@ package net.fabricmc.majobroom.entity;
 import net.fabricmc.majobroom.MajoBroom;
 import net.fabricmc.majobroom.armors.BaseArmor;
 import net.fabricmc.majobroom.armors.MajoWearableModel;
+import net.fabricmc.majobroom.config.MajoBroomConfig;
+import net.fabricmc.majobroom.sound.BroomFlyingSound;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.entity.Entity;
@@ -26,6 +28,7 @@ import net.minecraft.world.World;
 public class BroomEntity extends BoatEntity {
     public BroomEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
+        this.broomFlyingSound = new BroomFlyingSound(this);
     }
     private boolean forward = false;
     private boolean back = false;
@@ -42,6 +45,9 @@ public class BroomEntity extends BoatEntity {
     private float floatingValue = 0;
     private float floatingCounts = 0;
     private  float prevFloatingValue = 0;
+
+    private BroomFlyingSound broomFlyingSound = null;
+
     @Override
     public Item asItem() {
         return MajoBroom.broomItem;
@@ -64,26 +70,34 @@ public class BroomEntity extends BoatEntity {
 
         autoFall();
 
-        if (this.hasPassengers()){
-            if (passenger == null){
-                if (this.world.isClient && MinecraftClient.getInstance().player.getId() == this.getFirstPassenger().getId()){
-                    MinecraftClient.getInstance().options.setPerspective(Perspective.THIRD_PERSON_BACK);
-                }
-            }
-            passenger = this.getFirstPassenger();
-        }else {
-            if (passenger != null){
-                if (this.world.isClient && MinecraftClient.getInstance().player.getId() == passenger.getId()){
+        if (passenger != null){
+            if ((!this.hasPassengers()) && this.world.isClient && MinecraftClient.getInstance().player.getId() == passenger.getId()){
+                if(MajoBroomConfig.getInstance().autoThirdPersonView) {
                     MinecraftClient.getInstance().options.setPerspective(Perspective.FIRST_PERSON);
                 }
+                MinecraftClient.getInstance().getSoundManager().stop(broomFlyingSound);
+                broomFlyingSound = new BroomFlyingSound(this);
+                passenger = null;
             }
-            passenger = null;
         }
+        else{
+            if(this.hasPassengers() && this.getFirstPassenger().getId()==MinecraftClient.getInstance().player.getId()){
+                MinecraftClient.getInstance().getSoundManager().play(broomFlyingSound);
+                if(MajoBroomConfig.getInstance().autoThirdPersonView){
+                    MinecraftClient.getInstance().options.setPerspective(Perspective.THIRD_PERSON_BACK);
+                }
+                passenger = MinecraftClient.getInstance().player;
+            }
+        }
+
 
 
 
         if (this.world.isClient()){
             updateKeys();
+            if(this.hasPassengers() && MinecraftClient.getInstance().player.getId() == this.getFirstPassenger().getId()){
+                broomFlyingSound.tick();
+            }
             if(isLogicalSideForUpdatingMovement()){
                 var current_v = this.getVelocity();
                 var rotation_v = this.getRotationVector();
@@ -201,21 +215,15 @@ public class BroomEntity extends BoatEntity {
             if (!this.world.isClient) {
                 return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
             } else {
+
                 return ActionResult.SUCCESS;
             }
         }
     }
 
-    @Override
-    public void dismountVehicle() {
-//        System.out.println("dwdwdwdwdw");
-
-        super.dismountVehicle();
-    }
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-//        return super.damage(source, amount);
         if (source.getSource() instanceof PlayerEntity s){
             this.kill();
             if (!s.isCreative()) {
@@ -235,7 +243,6 @@ public class BroomEntity extends BoatEntity {
             this.floatingCounts -= 6.28f;
         }
         this.floatingValue = 0.1f * MathHelper.sin(2*this.floatingCounts);
-//        System.out.println(floatingValue);
     }
 
     public float getFloatingValue(float tickDelta){
