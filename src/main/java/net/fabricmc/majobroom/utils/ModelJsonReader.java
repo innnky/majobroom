@@ -19,7 +19,7 @@ public class ModelJsonReader {
 
     public static GeomtryBean readJson(String path) {
         try {
-            InputStream in = BroomItem.class.getClassLoader().getResourceAsStream("/assets/majobroom/" + path);
+            InputStream in = null;
             var list = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("majobroom",path));
             in = list.getInputStream();
             if (in != null) {
