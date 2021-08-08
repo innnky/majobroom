@@ -1,5 +1,6 @@
 package net.fabricmc.majobroom.config;
 
+import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.annotations.ConfigEntry;
 import net.minecraft.client.MinecraftClient;
 
@@ -11,10 +12,13 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class ConfigBase {
+
+
+
     public ConfigBase(String identifier) {
         configPath = "config" + File.separator +identifier+ ".prop";
         propertyBase = new Properties();
-        File configFile = new File(MinecraftClient.getInstance().runDirectory, configPath);
+        File configFile = new File(".", configPath);
         if (configFile.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(configFile);
