@@ -1,10 +1,13 @@
 package net.fabricmc.majobroom.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.MajoBroom;
 import net.fabricmc.majobroom.armors.BaseArmor;
 import net.fabricmc.majobroom.armors.MajoWearableModel;
 import net.fabricmc.majobroom.config.MajoBroomConfig;
 import net.fabricmc.majobroom.sound.BroomFlyingSound;
+import net.fabricmc.majobroom.sound.BroomFlyingSoundWrapper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.entity.Entity;
@@ -28,8 +31,13 @@ import net.minecraft.world.World;
 public class BroomEntity extends BoatEntity {
     public BroomEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
-        this.broomFlyingSound = new BroomFlyingSound(this);
+        initializeSound();
     }
+
+    private void initializeSound(){
+        broomFlyingSound = new BroomFlyingSoundWrapper(this);
+    }
+
     private boolean forward = false;
     private boolean back = false;
     private boolean left = false;
@@ -46,7 +54,7 @@ public class BroomEntity extends BoatEntity {
     private float floatingCounts = 0;
     private  float prevFloatingValue = 0;
 
-    private BroomFlyingSound broomFlyingSound = null;
+    private BroomFlyingSoundWrapper broomFlyingSound = null;
 
     @Override
     public Item asItem() {
@@ -65,24 +73,21 @@ public class BroomEntity extends BoatEntity {
         passenger.setPosition(passenger.getX(),passenger.getY()+0.6 +floatingValue,passenger.getZ());
     }
 
-    @Override
-    public void tick() {
-
-        autoFall();
+    @Environment(EnvType.CLIENT)
+    private void clientTick(){
 
         if (passenger != null){
             if ((!this.hasPassengers()) && this.world.isClient && MinecraftClient.getInstance().player.getId() == passenger.getId()){
                 if(MajoBroomConfig.getInstance().autoThirdPersonView) {
                     MinecraftClient.getInstance().options.setPerspective(Perspective.FIRST_PERSON);
                 }
-                MinecraftClient.getInstance().getSoundManager().stop(broomFlyingSound);
-                broomFlyingSound = new BroomFlyingSound(this);
+                broomFlyingSound.stop();
                 passenger = null;
             }
         }
         else{
             if(this.hasPassengers() && this.getFirstPassenger().getId()==MinecraftClient.getInstance().player.getId()){
-                MinecraftClient.getInstance().getSoundManager().play(broomFlyingSound);
+                broomFlyingSound.play();
                 if(MajoBroomConfig.getInstance().autoThirdPersonView){
                     MinecraftClient.getInstance().options.setPerspective(Perspective.THIRD_PERSON_BACK);
                 }
@@ -90,10 +95,18 @@ public class BroomEntity extends BoatEntity {
             }
         }
 
+    }
+
+    @Override
+    public void tick() {
+
+        autoFall();
+
 
 
 
         if (this.world.isClient()){
+            clientTick();
             updateKeys();
             if(this.hasPassengers() && MinecraftClient.getInstance().player.getId() == this.getFirstPassenger().getId()){
                 broomFlyingSound.tick();

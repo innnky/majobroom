@@ -1,5 +1,7 @@
 package net.fabricmc.majobroom.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.MajoBroom;
 import net.fabricmc.majobroom.armors.BaseArmor;
 import net.minecraft.client.MinecraftClient;
@@ -15,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Environment(EnvType.CLIENT)
 @Mixin(MinecraftClient.class)
 public class MinecraftMixin {
 	@Shadow @Final private ItemColors itemColors;

@@ -1,6 +1,8 @@
 package net.fabricmc.majobroom.client.render.feature;
 
 import com.google.common.collect.Maps;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.MajoBroom;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.render.OverlayTexture;
@@ -23,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
+@Environment(EnvType.CLIENT)
 public class MajoClothFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends ArmorFeatureRenderer<T, M,A> {
     private static MajoWearableModel hat = null;
     private static MajoWearableModel cloth = null;
