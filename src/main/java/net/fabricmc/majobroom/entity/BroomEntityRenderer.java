@@ -1,6 +1,10 @@
 package net.fabricmc.majobroom.entity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -9,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
+@Environment(EnvType.CLIENT)
 public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
     private final BroomModel broomModel = new BroomModel();
     public BroomEntityRenderer(EntityRendererFactory.Context context) {
@@ -17,8 +22,8 @@ public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
 
     @Override
     public void render(BroomEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(broomModel.getLayer(getTexture(entity)));
+        RenderLayer renderlayer =broomModel.getLayer(getTexture(entity));
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderlayer);
         float y = entity.getYaw(tickDelta);
         float p = entity.getPitch(tickDelta);
         float floating_value = entity.getFloatingValue(tickDelta);
@@ -31,8 +36,13 @@ public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
 
+    private final Identifier broomTexture = new Identifier("majobroom", "textures/entity/broom.png");
+    private final Identifier broomTextureTransparent = new Identifier("majobroom", "textures/entity/broom_transparent.png");
     @Override
     public Identifier getTexture(BroomEntity entity) {
-        return new Identifier("majobroom", "textures/entity/broom.png");
+        if(entity.hasPassengers() && entity.getFirstPassenger().getId()== MinecraftClient.getInstance().player.getId()){
+            return broomTextureTransparent;
+        }
+        return broomTexture;
     }
 }

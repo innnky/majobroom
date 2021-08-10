@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.majobroom.jsonbean.GeomtryBean;
 import net.fabricmc.majobroom.utils.ModelJsonReader;
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,9 +21,11 @@ public class BroomModel extends EntityModel<BroomEntity> {
     private final HashMap<String, BonesBean> bonesBean = new HashMap();
 
     public BroomModel() {
+        super(RenderLayer::getEntityTranslucent);
         this.base = getTexturedModelData().createModel();
-
     }
+
+
 
     @Override
     public void setAngles(BroomEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
