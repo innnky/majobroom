@@ -5,10 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.MajoBroom;
 import net.minecraft.client.model.Dilation;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
@@ -23,12 +20,16 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public class MajoClothFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends ArmorFeatureRenderer<T, M,A> {
     private static MajoWearableModel hat = null;
     private static MajoWearableModel cloth = null;
+    private static MajoWearableModel foot = null;
     public MajoClothFeatureRenderer(FeatureRendererContext<T, M> context, A leggingsModel, A bodyModel) {
         super(context, leggingsModel, bodyModel);
     }
@@ -37,15 +38,22 @@ public class MajoClothFeatureRenderer<T extends LivingEntity, M extends BipedEnt
 
         if (livingEntity.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof BaseArmor) {
             if (hat == null){
-                hat = new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(256, 256), "majo_hat.json");
+                hat = new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(256, 256), "majo_hat.json", MajoWearableModel.ModelType.HEAD);
             }
             this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.HEAD, light, (A) hat);
         }
         if (livingEntity.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof BaseArmor){
             if (cloth == null){
-                cloth = new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(256, 256), "majo_cloth.json");
+                cloth = new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(256, 256), "majo_cloth.json", MajoWearableModel.ModelType.UPPER_BODY);
             }
             this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.CHEST, light, (A) cloth);
+        }
+
+        if (livingEntity.getEquippedStack(EquipmentSlot.FEET).getItem() instanceof BaseArmor){
+            if (foot == null){
+                foot = new MajoWearableModel(BipedEntityModel.getModelData(Dilation.NONE, 0f).getRoot().createPart(64, 64), "stocking.json", MajoWearableModel.ModelType.FOOT);
+            }
+            this.renderArmor(matrixStack, vertexConsumerProvider, livingEntity, EquipmentSlot.FEET, light, (A) foot);
         }
     }
 
@@ -72,17 +80,26 @@ public class MajoClothFeatureRenderer<T extends LivingEntity, M extends BipedEnt
     }
 
     private void renderArmorParts(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ArmorItem item, boolean usesSecondLayer, A model, boolean legs, float red, float green, float blue, @Nullable String overlay) {
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, RenderLayer.getArmorCutoutNoCull(this.getArmorTexture(item, legs, overlay)), false, usesSecondLayer);
+        //RenderLayer layer = RenderLayer.getArmorCutoutNoCull(this.getArmorTexture(item, legs, overlay));
+        RenderLayer layer = RenderLayer.getEntityTranslucent(this.getArmorTexture(item, legs, overlay));
+
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers,layer , false, usesSecondLayer);
         model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, 1.0F);
     }
     private Identifier getArmorTexture(ArmorItem item, boolean legs, String overlay) {
         if (item instanceof BaseArmor){
-            if (item.toString().equals("majo_hat")){
-                return (new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+item.toString()+(overlay == null ? "" : "_" + overlay) + ".png"));
-            }else {
-                return (new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+item.toString() + ".png"));
+            switch (item.toString()){
+                case "majo_hat":
+                    return (new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+item.toString()+(overlay == null ? "" : "_" + overlay) + ".png"));
+                case "majo_cloth":
+                case "stocking":
+                    return (new Identifier(MajoBroom.MODID,"jsonmodels/textures/"+item.toString() + ".png"));
             }
         }
         return new Identifier(MajoBroom.MODID,"empty.png");
     }
+}
+
+class MajoStockRenderLayer{
+
 }
