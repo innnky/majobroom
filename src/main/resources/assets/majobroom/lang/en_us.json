@@ -12,5 +12,9 @@
   "message.majobroom.levelnotenough": "Experience Level Not Enough!",
   "message.majobroom.showlevel": "Current Level :%d",
   "advancements.majobroom.root.title": "Magical World",
-  "advancements.majobroom.root.description": "Make a broom"
+  "advancements.majobroom.root.description": "Make a broom",
+  "config.thirdperson": "Automatic switch to third-person view",
+  "config.requirelevel": "Riding require experience level",
+  "config.maxspeed": "Max speed",
+  "config.classicalmovement": "Classical movement"
 }

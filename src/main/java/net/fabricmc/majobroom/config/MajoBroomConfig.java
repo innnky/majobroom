@@ -12,6 +12,8 @@ public class MajoBroomConfig extends ConfigBase{
     public boolean requireXpLevel;
     @ConfigEntry(key = "autoThirdPersonView",booleanDefault = true)
     public boolean autoThirdPersonView;
+    @ConfigEntry(key="classicalMovement",booleanDefault = true)
+    public boolean classicalMovement;
 
     private MajoBroomConfig() {
         super(MajoBroom.MODID);

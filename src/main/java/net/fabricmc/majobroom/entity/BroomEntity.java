@@ -92,7 +92,20 @@ public class BroomEntity extends BoatEntity {
                     MinecraftClient.getInstance().options.setPerspective(Perspective.THIRD_PERSON_BACK);
                 }
                 passenger = MinecraftClient.getInstance().player;
+                if(!MajoBroomConfig.getInstance().classicalMovement) {
+                    passenger.setYaw(MathHelper.wrapDegrees(this.getYaw() + 90));
+                    passenger.setHeadYaw(MathHelper.wrapDegrees(this.getYaw() + 90));
+                }
             }
+        }
+
+        if(!MajoBroomConfig.getInstance().classicalMovement && passenger!=null){
+            float deltaYaw =passenger.getYaw()- (this.getYaw() + 90);
+            if(isLogicalSideForUpdatingMovement()){
+                this.setYaw(this.getYaw() + MathHelper.wrapDegrees(deltaYaw));
+            }
+            passenger.setYaw(MathHelper.wrapDegrees(this.getYaw() + 90));
+            passenger.setHeadYaw(MathHelper.wrapDegrees(this.getYaw() + 90));
         }
 
     }

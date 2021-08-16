@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.majobroom.jsonbean.GeomtryBean;
 import net.fabricmc.majobroom.utils.ModelJsonReader;
 import net.minecraft.client.model.*;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,12 +18,16 @@ public class MajoWearableModel extends BipedEntityModel<LivingEntity> {
     private final Map<String, ModelPartData> bones = new HashMap();
     private final HashMap<String, GeomtryBean.BonesBean> bonesBean = new HashMap();
     public  String name ;
-    public MajoWearableModel(ModelPart root, String name) {
-        super(root);
+    public  ModelType type;
+    public MajoWearableModel(ModelPart root, String name, ModelType type) {
+        super(root, RenderLayer::getEntityTranslucent);
         this.base = getTexturedModelData(name).createModel();
         this.name = name;
+        this.type = type;
     }
-
+    public static enum ModelType{
+        HEAD,UPPER_BODY,DOWN_BODY,FOOT
+    }
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
@@ -30,27 +35,31 @@ public class MajoWearableModel extends BipedEntityModel<LivingEntity> {
 //            modelRenderer.render(matrices, vertices, light, overlay, red, green, blue, alpha);
 //
 //        });
-        if(this.bones.get("bigBody") == null){
-            this.base.copyTransform(this.head);
-        }else {
-            this.base.getChild("bigBody").copyTransform(this.body);
-            this.base.getChild("epic").copyTransform(this.body);
-            this.base.getChild("bone81").getChild("left").copyTransform(this.rightArm);
-            this.base.getChild("bone81").getChild("right").copyTransform(this.leftArm);
-            ModelPart dress = (ModelPart)this.base.getChild("dress");
-            dress.pitch = (this.leftLeg.pitch +this.rightLeg.pitch)/2;
-            dress.pivotZ = this.leftLeg.pivotZ;
-            if (this.sneaking){
-                dress.pivotY =10.0F;
-                dress.pivotX =-1.04F;
-            }else {
-                dress.pivotY =10.0F;
-            }
-//            dress.pivotX =dress.pivotX+0.1f;
-//            dress.pivotX
-//            System.out.println(111);
-//            this.base.getChild()
+
+        switch (type){
+            case HEAD:
+                this.base.copyTransform(this.head);
+                break;
+            case UPPER_BODY:
+                this.base.getChild("bigBody").copyTransform(this.body);
+                this.base.getChild("epic").copyTransform(this.body);
+                this.base.getChild("bone81").getChild("left").copyTransform(this.rightArm);
+                this.base.getChild("bone81").getChild("right").copyTransform(this.leftArm);
+                ModelPart dress = (ModelPart)this.base.getChild("dress");
+                dress.pitch = (this.leftLeg.pitch +this.rightLeg.pitch)/2;
+                dress.pivotZ = this.leftLeg.pivotZ;
+                if (this.sneaking){
+                    dress.pivotY =10.0F;
+                    dress.pivotX =-1.04F;
+                }else {
+                    dress.pivotY =10.0F;
+                }
+                break;
+            case FOOT:
+                this.base.getChild("LeftLeg").copyTransform(this.leftLeg);
+                this.base.getChild("RightLeg").copyTransform(this.rightLeg);
         }
+
         this.base.render(matrices, vertices, light, overlay, red, green, blue, alpha);
     }
 
