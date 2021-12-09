@@ -2,7 +2,7 @@ package net.fabricmc.majobroom.utils;
 
 
 import com.google.gson.Gson;
-import net.fabricmc.loom.configuration.providers.minecraft.assets.MinecraftAssetsProvider;
+//import net.fabricmc.loom.configuration.providers.minecraft.assets.MinecraftAssetsProvider;
 import net.fabricmc.majobroom.MajoBroom;
 import net.fabricmc.majobroom.items.BroomItem;
 import net.fabricmc.majobroom.jsonbean.GeomtryBean;

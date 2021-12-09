@@ -3,6 +3,7 @@ package net.fabricmc.majobroom.entity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.Perspective;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -41,7 +42,10 @@ public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
     @Override
     public Identifier getTexture(BroomEntity entity) {
         if(entity.hasPassengers() && entity.getFirstPassenger().getId()== MinecraftClient.getInstance().player.getId()){
-            return broomTextureTransparent;
+            if(MinecraftClient.getInstance().options.getPerspective() == Perspective.FIRST_PERSON){
+
+                return broomTextureTransparent;
+            }
         }
         return broomTexture;
     }
