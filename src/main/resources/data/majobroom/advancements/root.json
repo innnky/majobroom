@@ -14,15 +14,22 @@
     "show_toast": false
   },
   "criteria": {
-    "certus": {
+    "broom_item": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "majobroom:broom_item"
+            "items": [
+              "majobroom:broom_item"
+            ]
           }
         ]
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "broom_item"
+    ]
+  ]
 }

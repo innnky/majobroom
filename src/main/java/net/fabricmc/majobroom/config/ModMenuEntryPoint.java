@@ -48,6 +48,12 @@ public class ModMenuEntryPoint implements ModMenuApi {
                         MajoBroomConfig.getInstance().maxMoveSpeed = d;
                     }
                 }).build());
+                category.addEntry(ConfigEntryBuilder.create().startBooleanToggle(new LiteralText("Legacy movement control"),config.classicalMovement).setSaveConsumer(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) {
+                        MajoBroomConfig.getInstance().classicalMovement = aBoolean;
+                    }
+                }).build());
                 return configBuilder.build();
             }
         };
