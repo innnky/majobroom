@@ -223,12 +223,12 @@ public class BroomEntity extends BoatEntity {
 
     int cd = 20;
     private void updateKeys(){
-        forward = MinecraftClient.getInstance().options.keyForward.isPressed();
-        back = MinecraftClient.getInstance().options.keyBack.isPressed();
-        left = MinecraftClient.getInstance().options.keyLeft.isPressed();
-        right = MinecraftClient.getInstance().options.keyRight.isPressed();
-        up = MinecraftClient.getInstance().options.keyJump.isPressed();
-        down = MinecraftClient.getInstance().options.keySprint.isPressed();
+        forward = MinecraftClient.getInstance().options.forwardKey.isPressed();
+        back = MinecraftClient.getInstance().options.backKey.isPressed();
+        left = MinecraftClient.getInstance().options.leftKey.isPressed();
+        right = MinecraftClient.getInstance().options.rightKey.isPressed();
+        up = MinecraftClient.getInstance().options.jumpKey.isPressed();
+        down = MinecraftClient.getInstance().options.sprintKey.isPressed();
 
     }
 
