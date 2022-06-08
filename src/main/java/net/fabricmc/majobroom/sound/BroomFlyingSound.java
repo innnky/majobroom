@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.entity.BroomEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MovingSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
@@ -16,7 +17,7 @@ public class BroomFlyingSound extends MovingSoundInstance {
     private int tickCount;
 
     public BroomFlyingSound(BroomEntity player) {
-        super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS);
+        super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS, SoundInstance.createRandom());
         this.player = player;
         this.repeat = true;
         this.repeatDelay = 0;

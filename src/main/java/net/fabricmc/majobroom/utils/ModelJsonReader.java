@@ -20,9 +20,11 @@ public class ModelJsonReader {
     public static GeomtryBean readJson(String path) {
         try {
             InputStream in = null;
-            var list = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("majobroom",path));
-            in = list.getInputStream();
-            if (in != null) {
+            var optionalResource = MinecraftClient.getInstance().getResourceManager().getResource(new Identifier("majobroom",path));
+//            in = list
+
+            if (optionalResource.isPresent()) {
+                in = optionalResource.get().getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
                 StringBuffer stringBuffer = new StringBuffer();
                 String temp = "";

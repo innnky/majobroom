@@ -130,7 +130,7 @@ public class BroomEntity extends BoatEntity {
                 rotation_v = new Vec3d(-rotation_v.z,rotation_v.y,rotation_v.x);
                 float target_v = 0;
                 if (passenger != null && ((PlayerEntity)passenger).getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof BaseArmor){
-                    maxspeed = 1;
+                    maxspeed = 0.6f;
                 }else {
                     maxspeed = 0.3f;
                 }
@@ -211,10 +211,7 @@ public class BroomEntity extends BoatEntity {
         this.smoothcd=10;
     }
 
-    @Override
-    public void updateTrackedPosition(Vec3d pos) {
-        super.updateTrackedPosition(pos);
-    }
+
 
     @Override
     protected void refreshPosition() {

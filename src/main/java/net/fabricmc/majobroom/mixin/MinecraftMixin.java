@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MinecraftMixin {
 	@Shadow @Final private ItemColors itemColors;
 
-	@Inject(at = @At("HEAD"), method = "initializeSearchableContainers")
+	@Inject(at = @At("HEAD"), method = "initializeSearchProviders")
 	private void initializeSearchableContainers(CallbackInfo info) {
 		this.itemColors.register((stack, tintIndex) -> {
 			return tintIndex > 0 ? -1 : ((BaseArmor)stack.getItem()).getColor(stack);
