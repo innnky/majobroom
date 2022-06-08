@@ -28,6 +28,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.stream.StreamSupport;
+
 public class BroomEntity extends BoatEntity {
     public BroomEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
@@ -129,7 +131,9 @@ public class BroomEntity extends BoatEntity {
                 var rotation_v = this.getRotationVector();
                 rotation_v = new Vec3d(-rotation_v.z,rotation_v.y,rotation_v.x);
                 float target_v = 0;
-                if (passenger != null && ((PlayerEntity)passenger).getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof BaseArmor){
+//                if (passenger != null && ((PlayerEntity)passenger).getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof BaseArmor){
+                if (passenger != null && StreamSupport.stream(((PlayerEntity)passenger).getItemsEquipped().spliterator(), false)
+                        .anyMatch(itemStack -> itemStack.getItem() instanceof  BaseArmor)){
                     maxspeed = 0.6f;
                 }else {
                     maxspeed = 0.3f;
