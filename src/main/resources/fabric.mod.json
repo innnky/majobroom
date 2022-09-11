@@ -42,12 +42,12 @@
   "depends": {
     "fabricloader": ">=0.12.0",
     "fabric": "*",
-    "minecraft": "1.19",
+    "minecraft": "1.19.2",
     "java": ">=17",
-    "cloth-config2":">=7.0.0"
+    "cloth-config2":">=8.2.88"
   },
   "suggests": {
-    "modmenu": ">=4.0.0"
+    "modmenu": ">=4.0.6"
   },
   "custom": {
     "modmenu": {
