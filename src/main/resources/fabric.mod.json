@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "majobroom",
-  "version": "1.2.2",
+  "version": "1.2.4",
 
   "name": "Majo's Broom",
   "description": "A flying broom!",
@@ -44,10 +44,10 @@
     "fabric": "*",
     "minecraft": "1.19.3",
     "java": ">=17",
-    "cloth-config2":">=8.2.88"
+    "cloth-config2":">=9.0.92"
   },
   "suggests": {
-    "modmenu": ">=4.0.6"
+    "modmenu": ">=5.0.0"
   },
   "custom": {
     "modmenu": {
