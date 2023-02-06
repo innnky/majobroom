@@ -66,6 +66,7 @@ public class MajoClothFeatureRenderer<T extends LivingEntity, M extends BipedEnt
         if (itemStack.getItem() instanceof BaseArmor) {
             ArmorItem armorItem = (ArmorItem)itemStack.getItem();
             if (armorItem.getSlotType() == armorSlot) {
+                this.getContextModel().copyBipedStateTo(model);
                 //this.getContextModel().setAttributes(model);
                 this.setVisible(model, armorSlot);
                 boolean bl = this.usesSecondLayer(armorSlot);
