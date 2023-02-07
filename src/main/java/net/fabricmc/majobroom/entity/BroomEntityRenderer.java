@@ -12,7 +12,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 @Environment(EnvType.CLIENT)
 public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
@@ -30,8 +30,8 @@ public class BroomEntityRenderer extends EntityRenderer<BroomEntity> {
         float floating_value = entity.getFloatingValue(tickDelta);
         matrices.push();
         matrices.translate(0,floating_value,0);
-        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(p));
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90-y));
+        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(p));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90-y));
         broomModel.render(matrices,vertexConsumer,light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
         matrices.pop();
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);

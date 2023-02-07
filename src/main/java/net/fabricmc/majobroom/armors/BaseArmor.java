@@ -10,7 +10,7 @@ import net.minecraft.nbt.NbtCompound;
 public class BaseArmor extends DyeableArmorItem implements DyeableItem {
 
     public BaseArmor(ArmorMaterial material, EquipmentSlot slot) {
-        super(material, slot, new Item.Settings().group(MajoBroom.majoGroup));
+        super(material, slot, new Item.Settings());
         DispenserBlock.registerBehavior(this,ArmorItem.DISPENSER_BEHAVIOR);//发射器穿装备
     }
 
