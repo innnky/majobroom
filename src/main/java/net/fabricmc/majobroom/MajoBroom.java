@@ -20,16 +20,21 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
 import net.minecraft.registry.Registry;
 
 
 public class MajoBroom implements ModInitializer {
 	public static final String MODID = "majobroom";
-	public static final ItemGroup majoGroup = FabricItemGroup.builder(new Identifier(MODID, "majo_group"))
+	private static final RegistryKey<ItemGroup> majoGroupRegistryKey = RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(MODID, "majo_group"));
+	public static final ItemGroup majoGroup = FabricItemGroup.builder()
+		.displayName(Text.translatable("itemGroup.majobroom.majo_group"))
 		.icon(() -> new ItemStack(MajoBroom.broomItem)).build();
-	
 
 	//盔甲部分
 	public static final ArmorMaterial FABRIC_ARMOR = new ArmorFabric();
@@ -39,12 +44,11 @@ public class MajoBroom implements ModInitializer {
 //	public static final Item majoStocking = new BaseArmor(FABRIC_ARMOR, EquipmentSlot.FEET);
 	public static final Item majoHat = new BaseArmor(FABRIC_ARMOR, EquipmentSlot.HEAD);
 
-
 	//ItemGroup
 	static {
-		ItemGroupEvents.modifyEntriesEvent(majoGroup).register(MajoBroom::setItemGroup);
+		ItemGroupEvents.modifyEntriesEvent(majoGroupRegistryKey).register(MajoBroom::setItemGroup);
 	}
-	
+
 	protected static void setItemGroup(FabricItemGroupEntries entries) {
 		entries.add(broomItem);
 		entries.add(majoHat);
@@ -61,7 +65,7 @@ public class MajoBroom implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-
+		Registry.register(Registries.ITEM_GROUP, majoGroupRegistryKey, majoGroup);
 		Registry.register(Registries.ITEM, new Identifier(MODID, "broom_item"), broomItem);
 		Registry.register(Registries.ITEM, new Identifier(MODID, "majo_cloth"), majoCloth);
 //		Registry.register(Registries.ITEM, new Identifier(MODID, "stocking"), majoStocking);
