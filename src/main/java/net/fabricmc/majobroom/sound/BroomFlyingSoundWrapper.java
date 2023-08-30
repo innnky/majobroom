@@ -14,19 +14,19 @@ public class BroomFlyingSoundWrapper {
     }
 
     public void stop() {
-         if(attachedInstance.world.isClient){
+         if(attachedInstance.getWorld().isClient){
              stop0();
          }
     }
 
     public void play() {
-        if(attachedInstance.world.isClient){
+        if(attachedInstance.getWorld().isClient){
             play0();
         }
     }
 
     public void tick() {
-        if(attachedInstance.world.isClient){
+        if(attachedInstance.getWorld().isClient){
             tick0();
         }
     }

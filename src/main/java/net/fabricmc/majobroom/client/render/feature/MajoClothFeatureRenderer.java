@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.majobroom.MajoBroom;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
@@ -11,6 +12,7 @@ import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.render.model.BakedModelManager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -30,8 +32,9 @@ public class MajoClothFeatureRenderer<T extends LivingEntity, M extends BipedEnt
     private static MajoWearableModel hat = null;
     private static MajoWearableModel cloth = null;
     private static MajoWearableModel foot = null;
+    private static BakedModelManager bakedModelManager = MinecraftClient.getInstance().getBakedModelManager();
     public MajoClothFeatureRenderer(FeatureRendererContext<T, M> context, A leggingsModel, A bodyModel) {
-        super(context, leggingsModel, bodyModel);
+        super(context, leggingsModel, bodyModel, bakedModelManager);
     }
     @Override
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, T livingEntity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {

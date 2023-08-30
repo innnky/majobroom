@@ -1,6 +1,7 @@
 package net.fabricmc.majobroom.armors;
 
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
@@ -13,13 +14,13 @@ public class ArmorFabric implements ArmorMaterial {
     public static final int[] BASE_PROTECTION_AMOUNT = new int[]{2,5,6,3};//定义护甲的保护值，顺序同上
 
     @Override
-    public int getDurability(EquipmentSlot arg0) {
-        return BASE_DURABILITY[arg0.getEntitySlotId()]*25;
+    public int getDurability(ArmorItem.Type type) {
+        return BASE_DURABILITY[type.getEquipmentSlot().getEntitySlotId()]*25;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot arg0) {
-        return BASE_PROTECTION_AMOUNT[arg0.getEntitySlotId()];
+    public int getProtection(ArmorItem.Type type) {
+        return BASE_PROTECTION_AMOUNT[type.getEquipmentSlot().getEntitySlotId()];
     }
 
     @Override

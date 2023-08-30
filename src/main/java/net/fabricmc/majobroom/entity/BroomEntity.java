@@ -70,16 +70,16 @@ public class BroomEntity extends BoatEntity {
     }
 
     @Override
-    public void updatePassengerPosition(Entity passenger) {
-        super.updatePassengerPosition(passenger);
-        passenger.setPosition(passenger.getX(),passenger.getY()+0.6 +floatingValue,passenger.getZ());
+    protected void updatePassengerPosition(Entity passenger, Entity.PositionUpdater positionUpdater) {
+        super.updatePassengerPosition(passenger, positionUpdater);
+        passenger.setPosition(passenger.getX(), passenger.getY() + 0.6 + floatingValue, passenger.getZ());
     }
 
     @Environment(EnvType.CLIENT)
     private void clientTick(){
 
         if (passenger != null){
-            if ((!this.hasPassengers()) && this.world.isClient && MinecraftClient.getInstance().player.getId() == passenger.getId()){
+            if ((!this.hasPassengers()) && this.getWorld().isClient && MinecraftClient.getInstance().player.getId() == passenger.getId()){
                 if(MajoBroomConfig.getInstance().autoThirdPersonView) {
                     MinecraftClient.getInstance().options.setPerspective(Perspective.FIRST_PERSON);
                 }
@@ -120,7 +120,7 @@ public class BroomEntity extends BoatEntity {
 
 
 
-        if (this.world.isClient()){
+        if (this.getWorld().isClient()){
             clientTick();
             updateKeys();
             if(this.hasPassengers() && MinecraftClient.getInstance().player.getId() == this.getFirstPassenger().getId()){
@@ -239,7 +239,7 @@ public class BroomEntity extends BoatEntity {
 
             return ActionResult.PASS;
         } else {
-            if (!this.world.isClient) {
+            if (!this.getWorld().isClient) {
                 return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
             } else {
 
